@@ -1,0 +1,238 @@
+﻿@model Query
+
+@{
+    ViewData["Title"] = "Результат";
+}
+
+<h1>Результат</h1>
+<hr />
+
+@if (string.IsNullOrEmpty(Model.Error))
+{
+    @if (Model.QueryId.Equals("S1"))
+    {
+        <p style="font-size:20px">
+            <b>Середня ціна продуктів розробника @Model.ManufName:</b> @decimal.Round(Model.AvgPrice, 2, MidpointRounding.AwayFromZero)
+        </p>
+    }
+    else if (Model.QueryId.Equals("S2"))
+    {
+        <p style="font-size:20px">
+            <b>Покупці, що придбали хоча б один продукт розробника @Model.ManufName</b>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Ім'я
+                    </th>
+                    <th>
+                        Прізвище
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.CustNames.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Model.CustNames[i]
+                        </td>
+                        <td>
+                            @Model.CustLastnames[i]
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else if (Model.QueryId.Equals("S3"))
+    {
+        <p style="font-size:20px">
+            <b>Назви та ціни всіх програмних продуктів усіх розробників із країни @Model.CountryName</b>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Назва
+                    </th>
+                    <th>
+                        Ціна
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.ProdNames.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Model.ProdNames[i]
+                        </td>
+                        <td>
+                            @decimal.Round(Model.ProdPrices[i], 2, MidpointRounding.AwayFromZero)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else if (Model.QueryId.Equals("S5"))
+    {
+        <p style="font-size:20px">
+            <b>Імена розробників, які продають продукти ціною не @Model.Price у.о.</b>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Ім'я/назва
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.ManufNames.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Model.ManufNames[i]
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else if (Model.QueryId.Equals("S6"))
+    {
+        <p style="font-size:20px">
+            <b>Імена розробників, які не продають продукти з назвою @Model.ProdName</b>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Ім'я/назва
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.ManufNames.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Model.ManufNames[i]
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else if (Model.QueryId.Equals("A1"))
+    {
+        <p style="font-size:20px">
+            <b>Назви країн, розробники з яких продають програмні продукти принаймні за всіма тими цінами, що й розробник із кодом @Model.ManufId</b>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Назва
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.CountryNames.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Model.CountryNames[i]
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else if (Model.QueryId.Equals("A2"))
+    {
+        <p style="font-size:20px">
+            <b>Прізвища покупців, які придбали точно ті ж самі програмні продукти, що й покупець з email @Model.CustEmail</b>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Прізвище
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.CustLastnames.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Model.CustLastnames[i]
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else if (Model.QueryId.Equals("A3"))
+    {
+        <p style="font-size:20px">
+            <b>Прізвища та email-и покупців з іменем @Model.CustName, які придбали всі наявні програмні продукти</b>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Прізвище
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.CustLastnames.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Model.CustLastnames[i]
+                        </td>
+                        <td>
+                            @Model.CustEmails[i]
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
+else
+{
+    <p style="font-size:20px">
+        Результат запиту порожній.
+        <br />
+        Будь ласка, спробуйте ще раз з іншим параметром.
+    </p>
+}
+
+<table>
+    <tr>
+        <td>
+            <form method="get" asp-controller="Queries" asp-action="Index">
+                <input type="submit" class="btn btn-primary" value="Назад до запитів" />
+            </form>
+        </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+            <form method="get" asp-controller="Home" asp-action="Index">
+                <input type="submit" class="btn btn-primary" value="На головну" />
+            </form>
+        </td>
+    </tr>
+</table>
+

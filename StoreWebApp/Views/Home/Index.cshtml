@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Головна";
+}
+
+<div class="text-center">
+    <h1 class="display-4">E-Store</h1>
+    <p>Забезпечуємо електронікою</p>
+</div>
+
+<form method="get" asp-controller="Manufacturers" asp-action="Index">
+    <p align="center">
+        <input type="submit" class="btn btn-primary btn-lg" style="width:200px" value="Виробники" />
+    </p>
+</form>
+
+<form method="get" asp-controller="Countries" asp-action="Index">
+    <p align="center">
+        <input type="submit" class="btn btn-primary btn-lg" style="width:200px" value="Країни-виробники" />
+    </p>
+</form>
+
+<form method="get" asp-controller="Products" asp-action="Index" asp-route-id="0">
+    <p align="center">
+        <input type="submit" class="btn btn-primary btn-lg" style="width:200px" value="Продукти" />
+    </p>
+</form>
+
+<form method="get" asp-controller="Customers" asp-action="Index">
+    <p align="center">
+        <input type="submit" class="btn btn-primary btn-lg" style="width:200px" value="Покупці" />
+    </p>
+</form>
+
+<form method="get" asp-controller="Orders" asp-action="Index" asp-route-id="0">
+    <p align="center">
+        <input type="submit" class="btn btn-primary btn-lg" style="width:200px" value="Покупки" />
+    </p>
+</form>
